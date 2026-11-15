@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { modules } from './data/index'; // Import the module menu
 import TopologyMap from './components/TopologyMap';
 import Timeline from './components/Timeline';

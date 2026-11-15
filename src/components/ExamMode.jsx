@@ -29,10 +29,16 @@ export default function ExamMode({ examData, onExit }) {
     return (
       <div className="h-full flex flex-col items-center justify-center p-8 text-center">
         <h2 className="text-3xl font-bold text-white mb-4">Exam Complete!</h2>
+        
+        {/* Simplified text to avoid quote errors */}
         <p className="text-xl text-gray-300 mb-6">
-          You scored <span className="text-blue-400 font-bold">{score}</span> out of <span className="text-blue-400 font-bold">{examData.length}</span>
+          You scored <b className="text-blue-400">{score}</b> out of <b className="text-blue-400">{examData.length}</b>
         </p>
-        <div className="text-6xl mb-8">{score === examData.length ? '🏆' : score > 0 ? '👍' : '📚'}</div>
+        
+        <div className="text-6xl mb-8">
+          {score === examData.length ? '🏆' : score > 0 ? '👍' : '📚'}
+        </div>
+        
         <button 
           onClick={onExit} 
           className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold"
