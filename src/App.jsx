@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="h-screen w-screen flex flex-col bg-gray-900 text-white font-mono">
       <header className="p-4 border-b border-gray-700">
-        <h1 className="text-xl font-bold text-blue-400">{module1Data.title}</h1>
+        <h1 className="text-xl font-bold text-blue-400">InfraBlueprint: ArgoCD Core Loop</h1>
       </header>
 
       <div className="flex-1 grid grid-rows-2 grid-cols-2 gap-2 p-2 overflow-hidden">
