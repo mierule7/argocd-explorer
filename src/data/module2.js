@@ -1,4 +1,3 @@
-// src/data/module2.js
 export const module2Data = {
   title: "Module 2: The App of Apps Pattern",
   steps: [

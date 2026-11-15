@@ -7,25 +7,22 @@ import ExamMode from './components/ExamMode';
 import { ReactFlowProvider } from '@xyflow/react';
 
 function App() {
-  // State for the selected module (default to Module 1)
   const [selectedModuleId, setSelectedModuleId] = useState(1);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [mode, setMode] = useState('learn'); // 'learn' or 'exam'
+  const [mode, setMode] = useState('learn');
 
-  // Find the currently selected module's data
   const currentModule = modules.find(m => m.id === selectedModuleId);
   const currentStep = currentModule.data.steps[currentStepIndex];
 
   // Reset the view when the user changes the module
   const handleModuleChange = (e) => {
     setSelectedModuleId(Number(e.target.value));
-    setCurrentStepIndex(0); // Reset to step 1
-    setMode('learn');       // Exit exam mode if active
-    setIsPlaying(false);    // Stop playing
+    setCurrentStepIndex(0);
+    setMode('learn');
+    setIsPlaying(false);
   };
 
-  // If in exam mode, render the exam
   if (mode === 'exam') {
     return (
       <div className="h-screen w-screen flex flex-col bg-gray-900 text-white font-mono">
@@ -40,7 +37,6 @@ function App() {
     );
   }
 
-  // Normal Learning View
   return (
     <div className="h-screen w-screen flex flex-col bg-gray-900 text-white font-mono">
       <header className="p-4 border-b border-gray-700 flex justify-between items-center">
@@ -51,7 +47,7 @@ function App() {
           <select 
             value={selectedModuleId} 
             onChange={handleModuleChange}
-            className="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+            className="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 cursor-pointer"
           >
             {modules.map((mod) => (
               <option key={mod.id} value={mod.id}>
@@ -61,7 +57,6 @@ function App() {
           </select>
         </div>
 
-        {/* Show Exam button only on the last step */}
         {currentStepIndex === currentModule.data.steps.length - 1 && (
           <button 
             onClick={() => setMode('exam')}
