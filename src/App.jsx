@@ -1,19 +1,75 @@
-import { useState } from 'react';
-import { module1Data } from './data/module1';
+import { useState, useEffect } from 'react';
+import { modules } from './data/index'; // Import the module menu
 import TopologyMap from './components/TopologyMap';
 import Timeline from './components/Timeline';
 import Inspector from './components/Inspector';
+import ExamMode from './components/ExamMode';
 import { ReactFlowProvider } from '@xyflow/react';
 
 function App() {
+  // State for the selected module (default to Module 1)
+  const [selectedModuleId, setSelectedModuleId] = useState(1);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const currentStep = module1Data.steps[currentStepIndex];
+  const [mode, setMode] = useState('learn'); // 'learn' or 'exam'
 
+  // Find the currently selected module's data
+  const currentModule = modules.find(m => m.id === selectedModuleId);
+  const currentStep = currentModule.data.steps[currentStepIndex];
+
+  // Reset the view when the user changes the module
+  const handleModuleChange = (e) => {
+    setSelectedModuleId(Number(e.target.value));
+    setCurrentStepIndex(0); // Reset to step 1
+    setMode('learn');       // Exit exam mode if active
+    setIsPlaying(false);    // Stop playing
+  };
+
+  // If in exam mode, render the exam
+  if (mode === 'exam') {
+    return (
+      <div className="h-screen w-screen flex flex-col bg-gray-900 text-white font-mono">
+        <header className="p-4 border-b border-gray-700 flex justify-between items-center">
+          <h1 className="text-xl font-bold text-blue-400">InfraBlueprint: Exam Mode</h1>
+          <button onClick={() => setMode('learn')} className="text-gray-400 hover:text-white">✕ Exit Exam</button>
+        </header>
+        <div className="flex-1 bg-gray-800 m-2 rounded-lg border border-gray-700 overflow-hidden">
+          <ExamMode examData={currentModule.data.exam} onExit={() => setMode('learn')} />
+        </div>
+      </div>
+    );
+  }
+
+  // Normal Learning View
   return (
     <div className="h-screen w-screen flex flex-col bg-gray-900 text-white font-mono">
-      <header className="p-4 border-b border-gray-700">
-        <h1 className="text-xl font-bold text-blue-400">InfraBlueprint: ArgoCD Core Loop</h1>
+      <header className="p-4 border-b border-gray-700 flex justify-between items-center">
+        <div className="flex items-center gap-4">
+          <h1 className="text-xl font-bold text-blue-400">InfraBlueprint</h1>
+          
+          {/* THE DROPDOWN MENU */}
+          <select 
+            value={selectedModuleId} 
+            onChange={handleModuleChange}
+            className="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+          >
+            {modules.map((mod) => (
+              <option key={mod.id} value={mod.id}>
+                {mod.title}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Show Exam button only on the last step */}
+        {currentStepIndex === currentModule.data.steps.length - 1 && (
+          <button 
+            onClick={() => setMode('exam')}
+            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-bold animate-pulse"
+          >
+            🎓 Take Exam
+          </button>
+        )}
       </header>
 
       <div className="flex-1 grid grid-rows-2 grid-cols-2 gap-2 p-2 overflow-hidden">
@@ -24,7 +80,7 @@ function App() {
         </div>
         <div className="col-span-1 row-span-1 bg-gray-800 rounded-lg border border-gray-700">
           <Timeline
-            steps={module1Data.steps}
+            steps={currentModule.data.steps}
             currentIndex={currentStepIndex}
             onSelectStep={setCurrentStepIndex}
             isPlaying={isPlaying}
