@@ -31,9 +31,9 @@ export const module2Data = {
       id: 3,
       time: "T+1.00s",
       title: "Child Apps Generated",
-      lesson: "ArgoCD automatically creates the child applications in the cluster.",
-      activeNodes: ["repo-server", "app-controller"],
-      activeEdge: "repo-controller",
+      lesson: "ArgoCD automatically creates the child applications in the cluster via the K8s API.",
+      activeNodes: ["app-controller", "k8s-api"],     // <--- New: Lights up K8s API
+      activeEdge: "controller-k8s",                   // <--- New: Highlights the line to K8s                 // <--- Old
       inspector: { 
         type: "yaml", 
         title: "Generated Apps", 
