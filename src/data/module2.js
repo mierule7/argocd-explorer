@@ -1,5 +1,6 @@
 export const module2Data = {
   title: "Module 2: The App of Apps Pattern",
+  visibleNodes: ["laptop", "github", "repo-server", "app-controller", "k8s-api"], // <--- Add this line!
   steps: [
     {
       id: 1,
