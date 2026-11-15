@@ -4,11 +4,18 @@ export default function Timeline({ steps, currentIndex, onSelectStep, isPlaying,
   useEffect(() => {
     if (isPlaying) {
       const interval = setInterval(() => {
-        onSelectStep((prev) => (prev + 1) % steps.length);
+        onSelectStep((prev) => {
+          // If we are at the last step, stop playing!
+          if (prev + 1 >= steps.length) {
+            setIsPlaying(false); 
+            return prev; // Stay on the last step
+          }
+          return prev + 1; // Otherwise, go to next step
+        });
       }, 3000);
       return () => clearInterval(interval);
     }
-  }, [isPlaying, steps.length, onSelectStep]);
+  }, [isPlaying, steps.length, onSelectStep, setIsPlaying]);
 
   return (
     <div className="p-4 overflow-y-auto h-full">
