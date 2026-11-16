@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { modules } from './data/index'; // Import the module menu
+import { topics } from './data/index'; // Import the module menu
 import TopologyMap from './components/TopologyMap';
 import Timeline from './components/Timeline';
 import Inspector from './components/Inspector';
@@ -12,7 +12,8 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [mode, setMode] = useState('learn');
 
-  const currentModule = modules.find(m => m.id === selectedModuleId);
+  const allModules = topics.flatMap(topic => topic.modules);
+  const currentModule = allModules.find(m => m.id === selectedModuleId);
   const currentStep = currentModule.data.steps[currentStepIndex];
 
   // Reset the view when the user changes the module
@@ -49,10 +50,14 @@ function App() {
             onChange={handleModuleChange}
             className="bg-gray-800 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 cursor-pointer"
           >
-            {modules.map((mod) => (
-              <option key={mod.id} value={mod.id}>
-                {mod.title}
-              </option>
+            {topics.map((topic) => (
+              <optgroup key={topic.name} label={topic.name} className="text-gray-400 font-bold bg-gray-900">
+                {topic.modules.map((mod) => (
+                  <option key={mod.id} value={mod.id} disabled={mod.data === null}>
+                    {mod.title}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </div>
