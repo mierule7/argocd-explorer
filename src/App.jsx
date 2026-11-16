@@ -70,7 +70,10 @@ function App() {
       <div className="flex-1 grid grid-rows-2 grid-cols-2 gap-2 p-2 overflow-hidden">
         <div className="col-span-2 row-span-1 bg-gray-800 rounded-lg border border-gray-700">
           <ReactFlowProvider>
-            <TopologyMap step={currentStep} />
+            <TopologyMap 
+            step={currentStep} 
+            visibleNodes={currentModule.data.visibleNodes}
+            />
           </ReactFlowProvider>
         </div>
         <div className="col-span-1 row-span-1 bg-gray-800 rounded-lg border border-gray-700">

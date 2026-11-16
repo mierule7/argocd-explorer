@@ -18,8 +18,13 @@ const baseEdges = [
   { id: 'k8s-worker', source: 'k8s-api', target: 'worker', markerEnd: { type: MarkerType.ArrowClosed } },
 ];
 
-export default function TopologyMap({ step }) {
-  const styledNodes = nodes.map(n => ({
+export default function TopologyMap({ step, visibleNodes }) {
+  // If visibleNodes is provided, only show those nodes. Otherwise, show all.
+  const nodesToShow = visibleNodes 
+    ? nodes.filter(n => visibleNodes.includes(n.id)) 
+    : nodes;
+
+  const styledNodes = nodesToShow.map(n => ({
     ...n,
     style: {
       background: step?.activeNodes?.includes(n.id) ? '#3b82f6' : '#1f2937',
