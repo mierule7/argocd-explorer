@@ -1,6 +1,6 @@
 export const module3Data = {
   title: "Module 3: DevSecOps - Secure Secret Management",
-  visibleNodes: ["laptop", "github", "repo-server", "app-controller", "k8s-api", "eso", "vault", "pod"],
+  visibleNodes: ["laptop", "github", "repo-server", "app-controller", "k8s-api", "eso", "pod"],
   steps: [
     {
       id: 1,
@@ -59,7 +59,7 @@ export const module3Data = {
       time: "T+2.00s",
       title: "Pod Mounts the Secret",
       lesson: "The application Pod starts and securely mounts the secret as an environment variable.",
-      activeNodes: ["k8s-api", "pod"],
+      activeNodes: ["eso", "pod"],
       activeEdge: "eso-pod",
       inspector: { 
         type: "yaml", 
