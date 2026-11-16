@@ -1,5 +1,6 @@
 export const module1Data = {
   title: "Module 1: The Core Reconciliation Loop",
+  visibleNodes: ["laptop", "github", "repo-server", "app-controller", "k8s-api", "worker"],
   steps: [
     {
       id: 1,
