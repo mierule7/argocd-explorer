@@ -1,19 +1,37 @@
-# React + Vite
+# InfraBlueprint 🏗️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Interactive DevOps Learning Platform**
 
-Currently, two official plugins are available:
+InfraBlueprint is a web-based tool that visualizes how DevOps and DevSecOps tools work under the hood. Instead of reading dry documentation, watch animated data flow through a network topology, inspect real code payloads, and test your knowledge.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🌐 **[Live Demo](https://infrablueprint.onrender.com)**  
+📖 **[Full Project Documentation](./PROJECT_DOCUMENTATION.md)**
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **Interactive Topology Maps:** Watch packets and data flow between components like GitHub, ArgoCD, and Kubernetes.
+- **Code Inspector:** Click any step to see the exact YAML, JSON, or HTTP payloads used in real-world scenarios.
+- **Exam Mode:** Test your knowledge with interactive quizzes at the end of every module.
+- **Modular Architecture:** Easily scalable. Add new tools (Terraform, Docker) as new "Topics" without rewriting the core app.
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend:** React + Vite
+- **Styling:** Tailwind CSS
+- **Diagrams:** React Flow (`@xyflow/react`)
+- **Hosting:** Render
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm
+
+### Local Development
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/infrablueprint.git
+   cd infrablueprint
+   ```
