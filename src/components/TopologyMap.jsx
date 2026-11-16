@@ -8,6 +8,9 @@ const nodes = [
   { id: 'app-controller', position: { x: 400, y: 200 }, data: { label: '🧠 App Controller' } },
   { id: 'k8s-api', position: { x: 600, y: 100 }, data: { label: '☸️ K8s API' } },
   { id: 'worker', position: { x: 800, y: 100 }, data: { label: '⚙️ Worker Node' } },
+  { id: 'eso', position: { x: 800, y: 0 }, data: { label: '🔐 ESO' } },
+  { id: 'vault', position: { x: 1000, y: 0 }, data: { label: '🏦 Vault' } },
+  { id: 'pod', position: { x: 1000, y: 200 }, data: { label: '📦 Pod' } },
 ];
 
 const baseEdges = [
@@ -16,6 +19,9 @@ const baseEdges = [
   { id: 'repo-controller', source: 'repo-server', target: 'app-controller', markerEnd: { type: MarkerType.ArrowClosed } },
   { id: 'controller-k8s', source: 'app-controller', target: 'k8s-api', markerEnd: { type: MarkerType.ArrowClosed } },
   { id: 'k8s-worker', source: 'k8s-api', target: 'worker', markerEnd: { type: MarkerType.ArrowClosed } },
+  { id: 'k8s-eso', source: 'k8s-api', target: 'eso', markerEnd: { type: MarkerType.ArrowClosed } },
+  { id: 'eso-vault', source: 'eso', target: 'vault', markerEnd: { type: MarkerType.ArrowClosed } },
+  { id: 'eso-pod', source: 'eso', target: 'pod', markerEnd: { type: MarkerType.ArrowClosed } },
 ];
 
 export default function TopologyMap({ step, visibleNodes }) {
