@@ -12,6 +12,11 @@ const baseNodes = [
   { id: 'eso', position: { x: 800, y: 0 }, data: { label: 'ESO', icon: '🔐' } },
   { id: 'vault', position: { x: 1000, y: 0 }, data: { label: 'Vault', icon: '🏦' } },
   { id: 'pod', position: { x: 1000, y: 200 }, data: { label: 'Pod', icon: '📦' } },
+  
+  // Module 4 nodes: Spread out further to the right to prevent overlap
+  { id: 'rollout-controller', position: { x: 800, y: 0 }, data: { label: 'Rollout Controller', icon: '🚀' } },
+  { id: 'ingress', position: { x: 1150, y: 0 }, data: { label: 'Ingress (Traffic)', icon: '🌐' } },
+  { id: 'prometheus', position: { x: 1150, y: 200 }, data: { label: 'Prometheus', icon: '📊' } },
 ];
 
 const baseEdges = [
@@ -23,9 +28,14 @@ const baseEdges = [
   { id: 'k8s-eso', source: 'k8s-api', target: 'eso', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
   { id: 'eso-vault', source: 'eso', target: 'vault', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
   { id: 'eso-pod', source: 'eso', target: 'pod', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
+  
+  // Module 4 Edges
+  { id: 'k8s-rollout', source: 'k8s-api', target: 'rollout-controller', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
+  { id: 'rollout-ingress', source: 'rollout-controller', target: 'ingress', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
+  { id: 'ingress-prometheus', source: 'ingress', target: 'prometheus', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
+  { id: 'prometheus-rollout', source: 'prometheus', target: 'rollout-controller', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
 ];
 
-// Register the custom node type
 const nodeTypes = { custom: CustomNode };
 
 export default function TopologyMap({ step, visibleNodes }) {
@@ -33,10 +43,9 @@ export default function TopologyMap({ step, visibleNodes }) {
     ? baseNodes.filter(n => visibleNodes.includes(n.id)) 
     : baseNodes;
 
-  // Add styling and 'isActive' status to the data
   const styledNodes = nodesToShow.map(n => ({
     ...n,
-    type: 'custom', // Tell React Flow to use our CustomNode
+    type: 'custom', 
     data: { 
       ...n.data, 
       isActive: step?.activeNodes?.includes(n.id) 

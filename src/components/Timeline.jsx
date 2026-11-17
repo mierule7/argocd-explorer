@@ -5,12 +5,11 @@ export default function Timeline({ steps, currentIndex, onSelectStep, isPlaying,
     if (isPlaying) {
       const interval = setInterval(() => {
         onSelectStep((prev) => {
-          // If we are at the last step, stop playing!
           if (prev + 1 >= steps.length) {
-            setIsPlaying(false); 
-            return prev; // Stay on the last step
+            setIsPlaying(false);
+            return prev;
           }
-          return prev + 1; // Otherwise, go to next step
+          return prev + 1;
         });
       }, 3000);
       return () => clearInterval(interval);
@@ -35,7 +34,18 @@ export default function Timeline({ steps, currentIndex, onSelectStep, isPlaying,
               index === currentIndex ? 'border-blue-500 bg-blue-900/30' : 'border-gray-700 hover:bg-gray-700'
             }`}
           >
-            <div className="text-xs text-gray-400">{step.time}</div>
+            <div className="flex items-center gap-2 text-xs text-gray-400 mb-1">
+              <span className="font-bold text-gray-500">#{step.id}</span>
+              <span>{step.time}</span>
+            </div>
+
+            {/* The packet header line: SOURCE → DESTINATION (only if from/to exist) */}
+            {step.from && step.to && (
+              <div className="text-[11px] font-mono text-green-400/80 mb-1">
+                {step.from} <span className="text-gray-500">→</span> {step.to}
+              </div>
+            )}
+
             <div className="font-bold text-white">{step.title}</div>
             <div className="text-sm text-gray-300 mt-1">{step.lesson}</div>
           </li>
