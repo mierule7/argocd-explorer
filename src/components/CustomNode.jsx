@@ -11,7 +11,7 @@ export default function CustomNode({ data }) {
         : 'bg-gray-800/90 border-gray-600 hover:border-gray-400'}
     `}>
       {/* Left connection point */}
-      <Handle type="target" position={Position.Left} className="!bg-gray-500 !w-2 !h-2 !border-0" />
+      <Handle type="target" position={Position.Left} className="bg-gray-500! w-2! h-2! border-0!" />
       
       {/* Icon */}
       <div className={`text-2xl transition-transform duration-300 ${isActive ? 'scale-125' : ''}`}>
@@ -24,7 +24,7 @@ export default function CustomNode({ data }) {
       </div>
 
       {/* Right connection point */}
-      <Handle type="source" position={Position.Right} className="!bg-gray-500 !w-2 !h-2 !border-0" />
+      <Handle type="source" position={Position.Right} className="bg-gray-500! w-2! h-2! border-0!" />
     </div>
   );
 }
