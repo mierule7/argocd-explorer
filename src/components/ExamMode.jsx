@@ -1,6 +1,8 @@
+import { useStore } from '../store';
 import { useState } from 'react';
 
-export default function ExamMode({ examData, onExit }) {
+export default function ExamMode({ examData, moduleId, onExit }) {
+  const saveExamResult = useStore((state) => state.saveExamResult);
   const [currentQ, setCurrentQ] = useState(0);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState(null);
@@ -40,7 +42,10 @@ export default function ExamMode({ examData, onExit }) {
         </div>
         
         <button 
-          onClick={onExit} 
+          onClick={() => {
+            saveExamResult(moduleId, score, examData.length);
+            onExit();
+          }} 
           className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold"
         >
           Back to Learning
