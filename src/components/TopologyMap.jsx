@@ -17,6 +17,11 @@ const baseNodes = [
   { id: 'rollout-controller', position: { x: 800, y: 0 }, data: { label: 'Rollout Controller', icon: '🚀' } },
   { id: 'ingress', position: { x: 1150, y: 0 }, data: { label: 'Ingress (Traffic)', icon: '🌐' } },
   { id: 'prometheus', position: { x: 1150, y: 200 }, data: { label: 'Prometheus', icon: '📊' } },
+  // Module 6 (Terraform) nodes
+  { id: 'ci-runner', position: { x: 800, y: 100 }, data: { label: 'CI Runner', icon: '⚙️' } },
+  { id: 'terraform', position: { x: 1000, y: 0 }, data: { label: 'Terraform', icon: '🟣' } },
+  { id: 'aws', position: { x: 1000, y: 200 }, data: { label: 'AWS Cloud', icon: '☁️' } },
+  { id: 'terraform-state', position: { x: 1200, y: 100 }, data: { label: 'State File', icon: '📄' } },
 ];
 
 const baseEdges = [
@@ -34,6 +39,11 @@ const baseEdges = [
   { id: 'rollout-ingress', source: 'rollout-controller', target: 'ingress', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
   { id: 'ingress-prometheus', source: 'ingress', target: 'prometheus', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
   { id: 'prometheus-rollout', source: 'prometheus', target: 'rollout-controller', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
+  // Terraform Edges
+  { id: 'github-ci', source: 'github', target: 'ci-runner', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
+  { id: 'ci-terraform', source: 'ci-runner', target: 'terraform', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
+  { id: 'terraform-aws', source: 'terraform', target: 'aws', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
+  { id: 'terraform-state', source: 'terraform', target: 'terraform-state', markerEnd: { type: MarkerType.ArrowClosed }, type: 'smoothstep' },
 ];
 
 const nodeTypes = { custom: CustomNode };
